@@ -1,36 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using GTA;
+using Screen = GTA.UI.Screen;
 
 namespace SlowMoEvents
 {
-    internal class onKeyPress : Script
+    internal class OnKeyPress : Script
     {
-        public onKeyPress()
+        public OnKeyPress()
         {
-            KeyUp += onKeyDown;
+            KeyUp += OnKeyDown;
         }
-        void onKeyDown(object sender, KeyEventArgs e)
+        void OnKeyDown(object sender, KeyEventArgs e)
         {
             //Toggle script
             if (e.KeyCode == Main.tog)
             {
-                Main._switch = !Main._switch;
-                if (Main._switch)
+                Main.modEnabled = !Main.modEnabled;
+                if (Main.modEnabled)
                 {
-                    GTA.UI.Screen.ShowHelpText("SlowMo Events Detector ~g~enabled", 1000, true, false);
+                    Screen.ShowHelpText("SlowMo Events Detector ~g~enabled", 1000, true, false);
                 }
-                else if (!Main._switch)
+                else if (!Main.modEnabled)
                 {
-                    GTA.UI.Screen.ShowHelpText("SlowMo Events Detector ~r~disabled", 1000, true, false);
+                    Screen.ShowHelpText("SlowMo Events Detector ~r~disabled", 1000, true, false);
                 }
             }
             //Instant slow mo toggle
-            if (e.KeyCode == Main.tog1 && Main._switch && Game.TimeScale == 1.0f)
+            if (e.KeyCode == Main.tog1 && Main.modEnabled && Game.TimeScale == 1.0f)
             {
                 Main.slowMo(true);
             }
